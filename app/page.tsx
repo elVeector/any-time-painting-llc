@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const services = [
   ['01', 'Pintura de interiores', 'Muros, techos, puertas y molduras con líneas limpias y atención cuidadosa en cada detalle.'],
@@ -11,6 +11,20 @@ const services = [
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  useEffect(() => {
+    const elements = document.querySelectorAll<HTMLElement>('.section, .testimonial, .contact, footer, .service-card, .project-card');
+    elements.forEach((element) => element.classList.add('reveal-ready'));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -45px 0px' });
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, []);
   const openEmail = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     const recipient = 'anytimepainting2024@gmail.com';
