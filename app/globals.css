@@ -13,3 +13,4 @@
 .about-art{background:linear-gradient(135deg,#ffa313 0 35%,#0788c5 35% 70%,#c9e9f5 70%)}
 .testimonial{background:#e7f4f9}.instagram-link{margin-top:16px;color:#0788c5;font-weight:700}.contact-card>small{overflow-wrap:anywhere}
 @media(max-width:560px){.brand-logo{width:44px;height:44px}.brand{font-size:16px}.hero-proof strong{font-size:20px}}
+.map-preview{margin-top:28px;background:#fff;padding:8px;color:var(--ink);box-shadow:0 14px 34px #07304724}.map-preview iframe{display:block;width:100%;height:245px;border:0}.map-preview a{display:block;padding:13px 10px 5px;font-size:11px;font-weight:800;text-align:center}.phone-link{margin-bottom:14px;font-size:15px!important}.contact-card>a{line-height:1.5}
