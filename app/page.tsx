@@ -33,6 +33,19 @@ const reviews = [
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [compare, setCompare] = useState(52);
+  const openEmail = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    const recipient = 'anytimepainting2024@gmail.com';
+    const subject = 'Solicitud de informes sobre servicios de pintura';
+    const body = 'Hola Any Time Painting LLC,\n\nMe gustaría solicitar información sobre sus servicios de pintura.\n\nGracias.';
+    const agent = navigator.userAgent;
+    const isAppleSafari = /Safari/i.test(agent) && !/Chrome|CriOS|Edg|OPR|Firefox|FxiOS/i.test(agent);
+    if (isAppleSafari) {
+      window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    } else {
+      window.location.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+  };
 
   useEffect(() => {
     const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
@@ -107,11 +120,11 @@ export default function Home() {
     </section>
 
     <section className="quote" id="contacto">
-      <div className="quote-copy" data-reveal><span className="kicker light">Cotización sin costo</span><h2>Cuéntanos sobre <em>tu próximo proyecto.</em></h2><p>Completa el formulario y abriremos WhatsApp con los datos listos para enviar. También puedes llamarnos o escribirnos directamente.</p><div className="contact-lines"><a href={`tel:+${phone}`}><span>☎</span><div><small>Teléfono</small><b>(626) 614-4419</b></div></a><a href="mailto:anytimepainting2024@gmail.com?subject=Solicitud%20de%20informes%20sobre%20servicios%20de%20pintura&body=Hola%20Any%20Time%20Painting%20LLC%2C%0A%0AMe%20gustaría%20solicitar%20información%20sobre%20sus%20servicios%20de%20pintura.%0A%0AGracias."><span>✉</span><div><small>Correo</small><b>anytimepainting2024@gmail.com</b></div></a><a href="https://www.google.com/maps/search/?api=1&query=12669+17th+St%2C+Chino%2C+CA+91710" target="_blank" rel="noreferrer"><span>⌖</span><div><small>Dirección</small><b>12669 17th St, Chino, CA 91710</b></div></a></div></div>
+      <div className="quote-copy" data-reveal><span className="kicker light">Cotización sin costo</span><h2>Cuéntanos sobre <em>tu próximo proyecto.</em></h2><p>Completa el formulario y abriremos WhatsApp con los datos listos para enviar. También puedes llamarnos o escribirnos directamente.</p><div className="contact-lines"><a href={`tel:+${phone}`}><span>☎</span><div><small>Teléfono</small><b>(626) 614-4419</b></div></a><a href="mailto:anytimepainting2024@gmail.com" onClick={openEmail}><span>✉</span><div><small>Correo</small><b>anytimepainting2024@gmail.com</b></div></a><a href="https://www.google.com/maps/search/?api=1&query=12669+17th+St%2C+Chino%2C+CA+91710" target="_blank" rel="noreferrer"><span>⌖</span><div><small>Dirección</small><b>12669 17th St, Chino, CA 91710</b></div></a></div></div>
       <form className="quote-form" onSubmit={submitQuote} data-reveal><div className="form-title"><h3>Solicita tu cotización</h3><span>Respondemos lo antes posible</span></div><label>Nombre completo<input name="name" required placeholder="Tu nombre"/></label><label>Teléfono<input name="phone" required type="tel" placeholder="(000) 000-0000"/></label><label>Tipo de espacio<select name="space" required defaultValue=""><option value="" disabled>Selecciona una opción</option><option>Casa o departamento</option><option>Oficina</option><option>Negocio o local comercial</option><option>Otro</option></select></label><label>Cuéntanos qué necesitas<textarea name="message" required rows={4} placeholder="Ej. Pintura interior para sala y dos habitaciones..."/></label><button type="submit">Enviar solicitud por WhatsApp <span>→</span></button><small>Al enviar, se abrirá WhatsApp con tu información lista para compartir.</small></form>
     </section>
 
-    <footer><div className="footer-brand"><img src="/any-time-painting-logo.jfif" alt="Any Time Painting LLC"/><p>Servicio profesional de pintura para hogares, oficinas y negocios en Chino y comunidades cercanas.</p></div><div><b>Explora</b><a href="#servicios">Servicios</a><a href="#ventajas">Por qué elegirnos</a><a href="#galeria">Resultados</a></div><div><b>Contacto</b><a href={`tel:+${phone}`}>(626) 614-4419</a><a href="mailto:anytimepainting2024@gmail.com?subject=Solicitud%20de%20informes%20sobre%20servicios%20de%20pintura&body=Hola%20Any%20Time%20Painting%20LLC%2C%0A%0AMe%20gustaría%20solicitar%20información%20sobre%20sus%20servicios%20de%20pintura.%0A%0AGracias.">anytimepainting2024@gmail.com</a><a href="https://www.instagram.com/paintinganytime?igsi=cHM5d25hMmwwODNp" target="_blank" rel="noreferrer">Instagram ↗</a></div><div className="copyright">© 2026 Any Time Painting LLC</div></footer>
+    <footer><div className="footer-brand"><img src="/any-time-painting-logo.jfif" alt="Any Time Painting LLC"/><p>Servicio profesional de pintura para hogares, oficinas y negocios en Chino y comunidades cercanas.</p></div><div><b>Explora</b><a href="#servicios">Servicios</a><a href="#ventajas">Por qué elegirnos</a><a href="#galeria">Resultados</a></div><div><b>Contacto</b><a href={`tel:+${phone}`}>(626) 614-4419</a><a href="mailto:anytimepainting2024@gmail.com" onClick={openEmail}>anytimepainting2024@gmail.com</a><a href="https://www.instagram.com/paintinganytime?igsi=cHM5d25hMmwwODNp" target="_blank" rel="noreferrer">Instagram ↗</a></div><div className="copyright">© 2026 Any Time Painting LLC</div></footer>
     <a className="whatsapp-float" href={`https://wa.me/${phone}?text=Hola%2C%20quiero%20solicitar%20una%20cotización%20de%20pintura.`} target="_blank" rel="noreferrer" aria-label="Hablar con un especialista por WhatsApp"><span>◉</span><b>Hablar con un especialista</b></a>
   </main>;
 }
