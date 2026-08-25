@@ -132,12 +132,14 @@ export default function Home() {
   return <main>
     <header className="header">
       <a href="#inicio" className="brand"><img src="/any-time-painting-logo.jfif" alt="Any Time Painting LLC"/><span>Any Time Painting LLC<small>{t.professional}</small></span></a>
-      <button className="menu" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen}>{menuOpen ? t.close : t.menu}</button>
       <nav className={menuOpen ? 'nav open' : 'nav'} aria-label={language === 'es' ? 'Navegación principal' : 'Main navigation'}>
         <a href="#servicios" onClick={() => setMenuOpen(false)}>{t.nav[0]}</a><a href="#ventajas" onClick={() => setMenuOpen(false)}>{t.nav[1]}</a><a href="#galeria" onClick={() => setMenuOpen(false)}>{t.nav[2]}</a><a href="#contacto" onClick={() => setMenuOpen(false)}>{t.nav[3]}</a>
       </nav>
-      <button className="language-toggle" onClick={() => setLanguage(language === 'es' ? 'en' : 'es')} aria-label={language === 'es' ? 'Translate page to English' : 'Traducir la página al español'}>{language === 'es' ? 'EN' : 'ES'} <span>文</span></button>
-      <a className="header-cta" href="#contacto">{t.freeQuote} <span>↗</span></a>
+      <div className="header-controls">
+        <button className="menu" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen}>{menuOpen ? t.close : t.menu}</button>
+        <button className="language-toggle" onClick={() => setLanguage(language === 'es' ? 'en' : 'es')} aria-label={language === 'es' ? 'Translate page to English' : 'Traducir la página al español'}>{language === 'es' ? 'EN' : 'ES'} <span>文</span></button>
+        <a className="header-cta" href="#contacto">{t.freeQuote} <span>↗</span></a>
+      </div>
     </header>
 
     <section className="hero" id="inicio">
