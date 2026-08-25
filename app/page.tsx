@@ -159,7 +159,7 @@ export default function Home() {
 
     <section className="section services" id="servicios">
       <div className="section-intro" data-reveal><div><span className="kicker">{t.servicesKicker}</span><h2>{t.servicesTitle}</h2></div><p>{t.servicesText}</p></div>
-      <div className="services-grid">{activeServices.map((service, i) => <article className="service-card" data-reveal style={{'--delay': `${i * 100}ms`} as React.CSSProperties} key={service.title}><span className="service-icon">{service.icon}</span><h3>{service.title}</h3><p>{service.text}</p><ul>{service.list.map(item => <li key={item}>✓ {item}</li>)}</ul><a href="#contacto">{t.quoteService} <span>→</span></a></article>)}</div>
+      <div className="services-grid">{activeServices.map((service, i) => <article className="service-card" data-reveal style={{'--delay': `${i * 100}ms`} as React.CSSProperties} key={i}><span className="service-icon">{service.icon}</span><h3>{service.title}</h3><p>{service.text}</p><ul>{service.list.map((item, itemIndex) => <li key={itemIndex}>✓ {item}</li>)}</ul><a href="#contacto">{t.quoteService} <span>→</span></a></article>)}</div>
     </section>
 
     <section className="why" id="ventajas">
@@ -183,7 +183,7 @@ export default function Home() {
 
     <section className="section reviews">
       <div className="reviews-head" data-reveal><span className="kicker">{t.reviewsKicker}</span><h2>{t.reviewsTitle}</h2></div>
-      <div className="reviews-grid">{activeReviews.map(([type,text], i)=><article data-reveal style={{'--delay':`${i*100}ms`} as React.CSSProperties} key={type}><div className="stars">★★★★★</div><p>{text}</p><div><span>{type.charAt(0)}</span><b>{type}<small>{t.sampleReview}</small></b></div></article>)}</div>
+      <div className="reviews-grid">{activeReviews.map(([type,text], i)=><article data-reveal style={{'--delay':`${i*100}ms`} as React.CSSProperties} key={i}><div className="stars">★★★★★</div><p>{text}</p><div><span>{type.charAt(0)}</span><b>{type}<small>{t.sampleReview}</small></b></div></article>)}</div>
     </section>
 
     <section className="quote" id="contacto">
