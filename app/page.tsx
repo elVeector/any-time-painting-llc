@@ -85,7 +85,7 @@ const reviewsEn = [
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [compare, setCompare] = useState(52);
-  const [language, setLanguage] = useState<'es' | 'en'>('es');
+  const [language, setLanguage] = useState<'es' | 'en'>('en');
   const t = content[language];
   const activeServices = language === 'es' ? services : servicesEn;
   const activeBenefits = language === 'es' ? benefits : benefitsEn;
@@ -98,8 +98,10 @@ export default function Home() {
   const openEmail = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     const recipient = 'anytimepainting2024@gmail.com';
-    const subject = 'Solicitud de informes sobre servicios de pintura';
-    const body = 'Hola Any Time Painting LLC,\n\nMe gustaría solicitar información sobre sus servicios de pintura.\n\nGracias.';
+    const subject = language === 'en' ? 'Request for painting service information' : 'Solicitud de informes sobre servicios de pintura';
+    const body = language === 'en'
+      ? 'Hello Any Time Painting LLC,\n\nI would like to request information about your painting services.\n\nThank you.'
+      : 'Hola Any Time Painting LLC,\n\nMe gustaría solicitar información sobre sus servicios de pintura.\n\nGracias.';
     const agent = navigator.userAgent;
     const isAppleSafari = /Safari/i.test(agent) && !/Chrome|CriOS|Edg|OPR|Firefox|FxiOS/i.test(agent);
     if (isAppleSafari) {

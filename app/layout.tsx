@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Any Time Painting LLC | Pintura profesional en Chino, CA',
-  description: 'Servicios de pintura residencial y comercial, interior y exterior, en Chino, California. Solicita una cotización gratuita.',
-  openGraph: { title: 'Any Time Painting LLC | Chino, CA', description: 'Pintura residencial y comercial con preparación cuidadosa y resultados profesionales.', type: 'website' },
+  title: 'Any Time Painting LLC | Professional Painting in Chino, CA',
+  description: 'Residential and commercial painting services for interiors and exteriors in Chino, California. Request a free estimate.',
+  openGraph: { title: 'Any Time Painting LLC | Chino, CA', description: 'Residential and commercial painting with careful preparation and professional results.', type: 'website' },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="es"><body>{children}</body></html>;
+  return <html lang="en"><body>{children}</body></html>;
 }
