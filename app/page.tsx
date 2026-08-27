@@ -86,6 +86,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [compare, setCompare] = useState(52);
   const [language, setLanguage] = useState<'es' | 'en'>('en');
+  const [scrolled, setScrolled] = useState(false);
   const t = content[language];
   const activeServices = language === 'es' ? services : servicesEn;
   const activeBenefits = language === 'es' ? benefits : benefitsEn;
@@ -95,6 +96,14 @@ export default function Home() {
   useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);
+
+  useEffect(() => {
+    const updateHeader = () => setScrolled(window.scrollY > 18);
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    return () => window.removeEventListener('scroll', updateHeader);
+  }, []);
+
   const openEmail = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     const recipient = 'anytimepainting2024@gmail.com';
@@ -104,11 +113,10 @@ export default function Home() {
       : 'Hola Any Time Painting LLC,\n\nMe gustaría solicitar información sobre sus servicios de pintura.\n\nGracias.';
     const agent = navigator.userAgent;
     const isAppleSafari = /Safari/i.test(agent) && !/Chrome|CriOS|Edg|OPR|Firefox|FxiOS/i.test(agent);
-    if (isAppleSafari) {
-      window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    } else {
-      window.location.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    }
+    const emailUrl = isAppleSafari
+      ? `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+      : `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(emailUrl, '_blank', 'noopener,noreferrer');
   };
 
   useEffect(() => {
@@ -130,7 +138,7 @@ export default function Home() {
   };
 
   return <main>
-    <header className="header">
+    <header className={`header site-header${scrolled ? ' scrolled' : ''}`}>
       <a href="#inicio" className="brand"><img src="/any-time-painting-logo.jfif" alt="Any Time Painting LLC"/><span>Any Time Painting LLC<small>{t.professional}</small></span></a>
       <nav className={menuOpen ? 'nav open' : 'nav'} aria-label={language === 'es' ? 'Navegación principal' : 'Main navigation'}>
         <a href="#servicios" onClick={() => setMenuOpen(false)}>{t.nav[0]}</a><a href="#ventajas" onClick={() => setMenuOpen(false)}>{t.nav[1]}</a><a href="#galeria" onClick={() => setMenuOpen(false)}>{t.nav[2]}</a><a href="#contacto" onClick={() => setMenuOpen(false)}>{t.nav[3]}</a>
