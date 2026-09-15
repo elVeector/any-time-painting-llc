@@ -38,6 +38,8 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: /any-time-painting-llc
       - name: Configure Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Upload site
         uses: actions/upload-pages-artifact@v4
         with:
