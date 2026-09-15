@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useState } from 'react';
 
 const phone = '16266144419';
+const assetPath = (file: string) => `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/${file}`;
 
 const services = [
   { icon: '⌂', title: 'Pintura residencial', text: 'Casas, departamentos, interiores y exteriores. Renovamos cada ambiente con preparación cuidadosa y acabados uniformes.', list: ['Muros y techos', 'Puertas y molduras', 'Fachadas y exteriores'] },
@@ -139,7 +140,7 @@ export default function Home() {
 
   return <main>
     <header className={`header site-header${scrolled ? ' scrolled' : ''}`}>
-      <a href="#inicio" className="brand"><img src="/any-time-painting-logo.jfif" alt="Any Time Painting LLC"/><span>Any Time Painting LLC<small>{t.professional}</small></span></a>
+      <a href="#inicio" className="brand"><img src={assetPath('any-time-painting-logo.jfif')} alt="Any Time Painting LLC"/><span>Any Time Painting LLC<small>{t.professional}</small></span></a>
       <nav className={menuOpen ? 'nav open' : 'nav'} aria-label={language === 'es' ? 'Navegación principal' : 'Main navigation'}>
         <a href="#servicios" onClick={() => setMenuOpen(false)}>{t.nav[0]}</a><a href="#ventajas" onClick={() => setMenuOpen(false)}>{t.nav[1]}</a><a href="#galeria" onClick={() => setMenuOpen(false)}>{t.nav[2]}</a><a href="#contacto" onClick={() => setMenuOpen(false)}>{t.nav[3]}</a>
       </nav>
@@ -151,7 +152,7 @@ export default function Home() {
     </header>
 
     <section className="hero" id="inicio">
-      <div className="hero-image"><img src="/hero-painter.jpg" alt="Pintor profesional trabajando cuidadosamente en una habitación"/><div className="hero-shade"/></div>
+      <div className="hero-image"><img src={assetPath('hero-painter.jpg')} alt="Pintor profesional trabajando cuidadosamente en una habitación"/><div className="hero-shade"/></div>
       <div className="hero-content">
         <div className="pill"><span>●</span> {t.location}</div>
         <h1>{t.hero}</h1>
@@ -171,14 +172,14 @@ export default function Home() {
     </section>
 
     <section className="why" id="ventajas">
-      <div className="why-image" data-reveal><img src="/office-room.webp" alt={language === 'es' ? 'Oficina moderna con acabados limpios en color azul' : 'Modern office with clean blue finishes'}/><div className="image-badge"><b>{t.badgeTitle}</b><span>{t.badgeText}</span></div></div>
+      <div className="why-image" data-reveal><img src={assetPath('office-room.webp')} alt={language === 'es' ? 'Oficina moderna con acabados limpios en color azul' : 'Modern office with clean blue finishes'}/><div className="image-badge"><b>{t.badgeTitle}</b><span>{t.badgeText}</span></div></div>
       <div className="why-copy" data-reveal><span className="kicker light">{t.whyKicker}</span><h2>{t.whyTitle}</h2><p>{t.whyText}</p><div className="benefits">{activeBenefits.map(item => <div key={item.n}><span>{item.n}</span><section><h3>{item.title}</h3><p>{item.text}</p></section></div>)}</div></div>
     </section>
 
     <section className="section gallery" id="galeria">
       <div className="gallery-heading" data-reveal><div><span className="kicker">{t.galleryKicker}</span><h2>{t.galleryTitle}</h2></div><p>{t.galleryText}</p></div>
       <div className="compare" data-reveal style={{'--position': `${compare}%`} as React.CSSProperties}>
-        <img className="after" src="/finished-room.jpg" alt="Después: sala moderna con acabado profesional"/><div className="before"><img src="/before-room.webp" alt="Antes: habitación preparada para renovación"/></div>
+        <img className="after" src={assetPath('finished-room.jpg')} alt="Después: sala moderna con acabado profesional"/><div className="before"><img src={assetPath('before-room.webp')} alt="Antes: habitación preparada para renovación"/></div>
         <span className="tag before-tag">{t.before}</span><span className="tag after-tag">{t.after}</span><span className="compare-line"><i>↔</i></span>
         <input type="range" min="5" max="95" value={compare} onChange={(e) => setCompare(Number(e.target.value))} aria-label={t.compareLabel}/>
       </div>
@@ -199,7 +200,7 @@ export default function Home() {
       <form className="quote-form" onSubmit={submitQuote} data-reveal><div className="form-title"><h3>{t.formTitle}</h3><span>{t.respond}</span></div><label>{t.fullName}<input name="name" required placeholder={t.namePlaceholder}/></label><label>{t.phoneLabel}<input name="phone" required type="tel" placeholder="(000) 000-0000"/></label><label>{t.spaceType}<select name="space" required defaultValue=""><option value="" disabled>{t.choose}</option>{t.spaces.map(space => <option key={space}>{space}</option>)}</select></label><label>{t.messageLabel}<textarea name="message" required rows={4} placeholder={t.messagePlaceholder}/></label><button type="submit">{t.send} <span>→</span></button><small>{t.sendNote}</small></form>
     </section>
 
-    <footer><div className="footer-brand"><img src="/any-time-painting-logo.jfif" alt="Any Time Painting LLC"/><p>{t.footerText}</p></div><div><b>{t.explore}</b><a href="#servicios">{t.nav[0]}</a><a href="#ventajas">{t.nav[1]}</a><a href="#galeria">{t.nav[2]}</a></div><div><b>{t.nav[3]}</b><a href={`tel:+${phone}`}>(626) 614-4419</a><a href="mailto:anytimepainting2024@gmail.com" onClick={openEmail}>anytimepainting2024@gmail.com</a><a href="https://www.instagram.com/paintinganytime?igsi=cHM5d25hMmwwODNp" target="_blank" rel="noreferrer">Instagram ↗</a></div><div className="copyright">© 2026 Any Time Painting LLC</div></footer>
+    <footer><div className="footer-brand"><img src={assetPath('any-time-painting-logo.jfif')} alt="Any Time Painting LLC"/><p>{t.footerText}</p></div><div><b>{t.explore}</b><a href="#servicios">{t.nav[0]}</a><a href="#ventajas">{t.nav[1]}</a><a href="#galeria">{t.nav[2]}</a></div><div><b>{t.nav[3]}</b><a href={`tel:+${phone}`}>(626) 614-4419</a><a href="mailto:anytimepainting2024@gmail.com" onClick={openEmail}>anytimepainting2024@gmail.com</a><a href="https://www.instagram.com/paintinganytime?igsi=cHM5d25hMmwwODNp" target="_blank" rel="noreferrer">Instagram ↗</a></div><div className="copyright">© 2026 Any Time Painting LLC</div></footer>
     <a className="whatsapp-float" href={`https://wa.me/${phone}?text=${language === 'es' ? 'Hola%2C%20quiero%20solicitar%20una%20cotización%20de%20pintura.' : 'Hello%2C%20I%20would%20like%20to%20request%20a%20painting%20estimate.'}`} target="_blank" rel="noreferrer" aria-label={`${t.specialist} WhatsApp`}><span>◉</span><b>{t.specialist}</b></a>
   </main>;
 }
